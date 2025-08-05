@@ -1,13 +1,13 @@
 name: first workflow
 on:
-  # workflow_dispatch:
-  #   inputs:
-  #     versionName:
-  #       required: true
-  #       description: "this is version Name for github workflow"
+  workflow_dispatch:
+    inputs:
+      versionName:
+        required: true
+        description: "this is version Name for github workflow"
   # repository_dispatch:
   #   types: [test]
-  push
+  # push
   #   branches:
   #     - "main"
   #     - "feat/**"
@@ -31,5 +31,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: after checkout 
+        if: github.event.inputs.versionName == 'test'
         run: ls
         shell: bash
