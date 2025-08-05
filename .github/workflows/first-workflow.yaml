@@ -1,13 +1,13 @@
 name: first workflow
 on:
-  workflow_dispatch:
-    inputs:
-      versionName:
-        required: true
-        description: "this is version Name for github workflow"
+  # workflow_dispatch:
+  #   inputs:
+  #     versionName:
+  #       required: true
+  #       description: "this is version Name for github workflow"
   # repository_dispatch:
   #   types: [test]
-  # push
+  push
   #   branches:
   #     - "main"
   #     - "feat/**"
@@ -21,7 +21,12 @@ jobs:
   first-workflow-job:
     name: first job
     runs-on: ubuntu-latest
+    container:
+      image: node:14.16
+
     steps:
+      - name: check node version
+        run: node -v
       - name: before checkout
         if: github.ref == 'refs/head/feature'
         run: ls
